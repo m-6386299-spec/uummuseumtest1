@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="ms">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,35 +16,33 @@
       margin: 0;
       background: var(--light-bg);
       color: #222;
-      line-height: 1.5;
+      line-height: 1.6;
     }
 
-    /* === HEADER === */
     header {
       background: var(--uum-blue);
       color: var(--white);
-      padding: 14px 24px;
+      padding: 14px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 10px;
     }
 
     header h1 {
       margin: 0;
-      font-size: 1.4em;
-      text-align: center;
+      font-size: 1.3em;
       flex: 1 1 100%;
+      text-align: center;
     }
 
     nav {
       display: flex;
-      gap: 14px;
+      gap: 12px;
       align-items: center;
       justify-content: center;
       flex: 1 1 100%;
-      flex-wrap: wrap;
+      margin-top: 8px;
     }
 
     nav a {
@@ -56,36 +52,45 @@
       cursor: pointer;
     }
 
-    nav a:hover { color: var(--uum-yellow); }
+    nav a:hover {
+      color: var(--uum-yellow);
+    }
 
     select {
       background: var(--white);
       color: var(--uum-blue);
-      padding: 6px 8px;
+      padding: 5px 10px;
       border-radius: 6px;
       border: none;
       cursor: pointer;
-      font-weight: 600;
     }
 
     main {
       padding: 20px;
-      max-width: 1000px;
+      width: 100%;
+      max-width: 900px;
       margin: auto;
     }
 
-    .page { display: none; animation: fadeIn 0.4s ease-in; }
-    .page.active { display: block; }
+    .page {
+      display: none;
+      animation: fadeIn 0.4s ease-in;
+    }
+    .page.active {
+      display: block;
+    }
 
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
 
-    /* === SEGMENTS === */
     .segment {
       background: var(--white);
-      padding: 20px;
+      padding: 16px;
       border-radius: 14px;
       box-shadow: var(--card-shadow);
-      margin-bottom: 26px;
+      margin-bottom: 22px;
       overflow: hidden;
     }
 
@@ -96,35 +101,29 @@
       max-height: 250px;
       object-fit: cover;
       border-radius: 12px 12px 0 0;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     audio {
       width: 100%;
-      margin-top: 10px;
+      margin-top: 8px;
     }
 
     .transcript {
       margin-top: 10px;
       background: #f9f9f9;
-      padding: 12px;
+      padding: 10px;
       border-left: 4px solid var(--uum-blue);
       border-radius: 6px;
     }
 
-    /* === FEEDBACK FORM === */
     .feedback-container {
       background: var(--white);
-      padding: 24px;
+      padding: 20px;
       border-radius: 14px;
       box-shadow: var(--card-shadow);
       max-width: 600px;
       margin: auto;
-    }
-
-    .feedback-container h2 {
-      color: var(--uum-blue);
-      text-align: center;
     }
 
     form {
@@ -139,7 +138,6 @@
       border-radius: 8px;
       font-size: 1em;
       width: 100%;
-      box-sizing: border-box;
     }
 
     button {
@@ -172,51 +170,52 @@
       cursor: pointer;
     }
 
-    /* === FOOTER === */
     footer {
       background: var(--uum-blue);
       color: var(--white);
       padding: 20px 24px;
       text-align: center;
       margin-top: 40px;
+      font-size: 0.95em;
     }
 
     footer a {
       color: var(--uum-yellow);
       text-decoration: none;
-      font-weight: 500;
     }
 
     footer a:hover {
       text-decoration: underline;
     }
 
-    /* === RESPONSIVE DESIGN === */
-    @media (max-width: 768px) {
+    /* --- RESPONSIVE STYLING --- */
+    @media (min-width: 700px) {
+      header {
+        flex-wrap: nowrap;
+      }
       header h1 {
-        font-size: 1.2em;
+        flex: 1;
+        text-align: left;
+        font-size: 1.6em;
       }
-      .segment {
-        padding: 15px;
+      nav {
+        flex: 0 0 auto;
+        justify-content: flex-end;
+        margin-top: 0;
       }
-      audio {
-        margin-top: 6px;
-      }
-      .feedback-container {
-        padding: 18px;
+      main {
+        padding: 30px;
       }
     }
 
     @media (max-width: 480px) {
-      header {
-        flex-direction: column;
-        align-items: center;
+      .segment img {
+        max-height: 200px;
       }
-      nav {
-        flex-direction: column;
-        gap: 8px;
+      header h1 {
+        font-size: 1.1em;
       }
-      select {
+      button {
         font-size: 0.9em;
       }
     }
@@ -241,7 +240,6 @@
     <section id="audio-page" class="page active">
       <h2 id="audio-heading">Segmen Audio Panduan Muzium</h2>
 
-      <!-- Repeatable Segment Template -->
       <div class="segment">
         <img src="imagessegment1.jpg" alt="Segment 1">
         <h3 id="seg1-title">Segmen 1: Sejarah Penubuhan UUM</h3>
@@ -310,7 +308,6 @@
   </footer>
 
   <script>
-    // === PAGE SWITCHING ===
     const pages = document.querySelectorAll('.page');
     const navAudio = document.getElementById('nav-audio');
     const navFeedback = document.getElementById('nav-feedback');
@@ -423,6 +420,7 @@
       document.getElementById('submitted-title').innerText = t.submittedTitle;
       document.getElementById('backAudio').innerText = t.back;
 
+      // switch audio visibility
       document.querySelectorAll('.audio-bm').forEach(a => a.style.display = lang === 'ms' ? 'block' : 'none');
       document.querySelectorAll('.audio-en').forEach(a => a.style.display = lang === 'en' ? 'block' : 'none');
     }
@@ -440,4 +438,3 @@
 
 </body>
 </html>
-
