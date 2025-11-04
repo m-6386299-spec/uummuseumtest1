@@ -1,5 +1,3 @@
-# uummuseumtest1
-muzeum audio website
 <!DOCTYPE html>
 <html lang="ms">
 <head>
@@ -20,20 +18,36 @@ muzeum audio website
       margin: 0;
       background: var(--light-bg);
       color: #222;
+      line-height: 1.5;
     }
 
+    /* === HEADER === */
     header {
       background: var(--uum-blue);
       color: var(--white);
-      padding: 16px 24px;
+      padding: 14px 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
-    header h1 { margin: 0; font-size: 1.4em; }
+    header h1 {
+      margin: 0;
+      font-size: 1.4em;
+      text-align: center;
+      flex: 1 1 100%;
+    }
 
-    nav { display: flex; gap: 14px; align-items: center; }
+    nav {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      justify-content: center;
+      flex: 1 1 100%;
+      flex-wrap: wrap;
+    }
 
     nav a {
       color: var(--white);
@@ -47,19 +61,25 @@ muzeum audio website
     select {
       background: var(--white);
       color: var(--uum-blue);
-      padding: 4px 8px;
+      padding: 6px 8px;
       border-radius: 6px;
       border: none;
       cursor: pointer;
+      font-weight: 600;
     }
 
-    main { padding: 24px; max-width: 1000px; margin: auto; }
+    main {
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
 
     .page { display: none; animation: fadeIn 0.4s ease-in; }
     .page.active { display: block; }
 
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
+    /* === SEGMENTS === */
     .segment {
       background: var(--white);
       padding: 20px;
@@ -72,13 +92,17 @@ muzeum audio website
     .segment img {
       display: block;
       width: 100%;
-      height: 250px;
+      height: auto;
+      max-height: 250px;
       object-fit: cover;
       border-radius: 12px 12px 0 0;
       margin-bottom: 12px;
     }
 
-    audio { width: 100%; margin-top: 10px; }
+    audio {
+      width: 100%;
+      margin-top: 10px;
+    }
 
     .transcript {
       margin-top: 10px;
@@ -88,6 +112,7 @@ muzeum audio website
       border-radius: 6px;
     }
 
+    /* === FEEDBACK FORM === */
     .feedback-container {
       background: var(--white);
       padding: 24px;
@@ -97,15 +122,24 @@ muzeum audio website
       margin: auto;
     }
 
-    .feedback-container h2 { color: var(--uum-blue); }
+    .feedback-container h2 {
+      color: var(--uum-blue);
+      text-align: center;
+    }
 
-    form { display: flex; flex-direction: column; gap: 10px; }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
 
     input, textarea {
       padding: 10px;
       border: 1px solid #ccc;
       border-radius: 8px;
       font-size: 1em;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     button {
@@ -147,11 +181,6 @@ muzeum audio website
       margin-top: 40px;
     }
 
-    footer p {
-      margin: 6px 0;
-      font-size: 0.95em;
-    }
-
     footer a {
       color: var(--uum-yellow);
       text-decoration: none;
@@ -160,6 +189,36 @@ muzeum audio website
 
     footer a:hover {
       text-decoration: underline;
+    }
+
+    /* === RESPONSIVE DESIGN === */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 1.2em;
+      }
+      .segment {
+        padding: 15px;
+      }
+      audio {
+        margin-top: 6px;
+      }
+      .feedback-container {
+        padding: 18px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        flex-direction: column;
+        align-items: center;
+      }
+      nav {
+        flex-direction: column;
+        gap: 8px;
+      }
+      select {
+        font-size: 0.9em;
+      }
     }
   </style>
 </head>
@@ -182,6 +241,7 @@ muzeum audio website
     <section id="audio-page" class="page active">
       <h2 id="audio-heading">Segmen Audio Panduan Muzium</h2>
 
+      <!-- Repeatable Segment Template -->
       <div class="segment">
         <img src="imagessegment1.jpg" alt="Segment 1">
         <h3 id="seg1-title">Segmen 1: Sejarah Penubuhan UUM</h3>
@@ -242,7 +302,6 @@ muzeum audio website
     </section>
   </main>
 
-  <!-- === FOOTER SECTION === -->
   <footer>
     <p><strong>UUM Management Museum</strong> | Universiti Utara Malaysia</p>
     <p>Email: <a href="mailto:museum@uum.edu.my">museum@uum.edu.my</a> | Tel: +604-928 4000</p>
@@ -251,6 +310,7 @@ muzeum audio website
   </footer>
 
   <script>
+    // === PAGE SWITCHING ===
     const pages = document.querySelectorAll('.page');
     const navAudio = document.getElementById('nav-audio');
     const navFeedback = document.getElementById('nav-feedback');
@@ -314,8 +374,6 @@ muzeum audio website
         feedbackTitle: "Borang Maklum Balas",
         labelName: "Nama:",
         labelFeedback: "Maklum Balas:",
-        placeholderName: " ",
-        placeholderFeedback: " ",
         submit: "Hantar Maklum Balas",
         submittedTitle: "Maklum Balas Dihantar:",
         back: "← Kembali ke Panduan Audio"
@@ -332,7 +390,7 @@ muzeum audio website
         seg5: "Segment 5: Key Figures and Contributions",
         transcripts: [
           "Universiti Utara Malaysia was established in 1984...",
-          "UUM’s vision is to be a leading management university in the region...",
+          "UUM’s vision is to be a leading management university...",
           "UUM consists of various faculties and academic centres...",
           "The museum showcases a wide range of historical artifacts...",
           "This section introduces key figures who contributed to UUM’s growth..."
@@ -340,8 +398,6 @@ muzeum audio website
         feedbackTitle: "Feedback Form",
         labelName: "Name:",
         labelFeedback: "Feedback:",
-        placeholderName: " ",
-        placeholderFeedback: " ",
         submit: "Submit Feedback",
         submittedTitle: "Feedback Submitted:",
         back: "← Back to Audio Guide"
@@ -363,13 +419,10 @@ muzeum audio website
       document.getElementById('feedback-title').innerText = t.feedbackTitle;
       document.getElementById('label-name').innerText = t.labelName;
       document.getElementById('label-feedback').innerText = t.labelFeedback;
-      document.getElementById('name').placeholder = t.placeholderName;
-      document.getElementById('feedback').placeholder = t.placeholderFeedback;
       document.getElementById('submit-btn').innerText = t.submit;
       document.getElementById('submitted-title').innerText = t.submittedTitle;
       document.getElementById('backAudio').innerText = t.back;
 
-      // switch audio visibility
       document.querySelectorAll('.audio-bm').forEach(a => a.style.display = lang === 'ms' ? 'block' : 'none');
       document.querySelectorAll('.audio-en').forEach(a => a.style.display = lang === 'en' ? 'block' : 'none');
     }
