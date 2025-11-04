@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="ms">
 <head>
   <meta charset="UTF-8">
@@ -11,12 +12,15 @@
       --light-bg: #f4f6fb;
       --card-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
+
     body {
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
       background: var(--light-bg);
       color: #222;
+      line-height: 1.6;
     }
+
     header {
       background: var(--uum-blue);
       color: var(--white);
@@ -24,16 +28,60 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
     }
-    header h1 { margin: 0; font-size: 1.4em; }
-    nav { display: flex; gap: 14px; align-items: center; }
-    nav a { color: var(--white); text-decoration: none; font-weight: 500; cursor: pointer; }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.4em;
+      flex: 1 1 100%;
+      text-align: center;
+    }
+
+    nav {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    nav a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
     nav a:hover { color: var(--uum-yellow); }
-    select { background: var(--white); color: var(--uum-blue); padding: 4px 8px; border-radius: 6px; border: none; cursor: pointer; }
-    main { padding: 24px; max-width: 1000px; margin: auto; }
-    .page { display: none; animation: fadeIn 0.4s ease-in; }
+
+    select {
+      background: var(--white);
+      color: var(--uum-blue);
+      padding: 4px 8px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+    }
+
+    main {
+      padding: 24px;
+      max-width: 1000px;
+      margin: auto;
+      box-sizing: border-box;
+    }
+
+    .page {
+      display: none;
+      animation: fadeIn 0.4s ease-in;
+    }
+
     .page.active { display: block; }
+
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
     .segment {
       background: var(--white);
       padding: 20px;
@@ -42,8 +90,22 @@
       margin-bottom: 26px;
       overflow: hidden;
     }
-    .segment img { display: block; width: 100%; height: 250px; object-fit: cover; border-radius: 12px 12px 0 0; margin-bottom: 12px; }
-    audio { width: 100%; margin-top: 10px; }
+
+    .segment img {
+      display: block;
+      width: 100%;
+      max-height: 250px;
+      object-fit: cover;
+      border-radius: 12px 12px 0 0;
+      margin-bottom: 12px;
+    }
+
+    audio {
+      width: 100%;
+      max-width: 100%;
+      margin-top: 10px;
+    }
+
     .transcript-btn {
       background: var(--uum-blue);
       color: var(--white);
@@ -54,20 +116,111 @@
       cursor: pointer;
       margin-top: 8px;
     }
+
     .transcript-btn:hover { background: var(--uum-yellow); color: var(--uum-blue); }
-    .transcript { display: none; margin-top: 10px; background: #f9f9f9; padding: 12px; border-left: 4px solid var(--uum-blue); border-radius: 6px; }
-    .feedback-container { background: var(--white); padding: 24px; border-radius: 14px; box-shadow: var(--card-shadow); max-width: 600px; margin: auto; }
+
+    .transcript {
+      display: none;
+      margin-top: 10px;
+      background: #f9f9f9;
+      padding: 12px;
+      border-left: 4px solid var(--uum-blue);
+      border-radius: 6px;
+      font-size: 0.95em;
+      word-wrap: break-word;
+    }
+
+    .feedback-container {
+      background: var(--white);
+      padding: 24px;
+      border-radius: 14px;
+      box-shadow: var(--card-shadow);
+      max-width: 600px;
+      margin: auto;
+    }
+
     .feedback-container h2 { color: var(--uum-blue); }
-    form { display: flex; flex-direction: column; gap: 10px; }
-    input, textarea { padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 1em; }
-    button { background: var(--uum-blue); color: var(--white); border: none; border-radius: 8px; padding: 10px; font-weight: bold; cursor: pointer; }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    input, textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1em;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    button {
+      background: var(--uum-blue);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      padding: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
     button:hover { background: var(--uum-yellow); color: var(--uum-blue); }
-    .feedback-display { margin-top: 20px; border-top: 2px solid #eee; padding-top: 10px; }
-    .back-btn { display: inline-block; margin-top: 15px; color: var(--uum-blue); text-decoration: none; font-weight: 600; cursor: pointer; }
-    footer { background: var(--uum-blue); color: var(--white); padding: 20px 24px; text-align: center; margin-top: 40px; }
-    footer p { margin: 6px 0; font-size: 0.95em; }
+
+    .feedback-display {
+      margin-top: 20px;
+      border-top: 2px solid #eee;
+      padding-top: 10px;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 15px;
+      color: var(--uum-blue);
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    footer {
+      background: var(--uum-blue);
+      color: var(--white);
+      padding: 20px 24px;
+      text-align: center;
+      margin-top: 40px;
+      font-size: 0.95em;
+    }
+
     footer a { color: var(--uum-yellow); text-decoration: none; font-weight: 500; }
     footer a:hover { text-decoration: underline; }
+
+    /* ===== Responsive adjustments ===== */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        text-align: center;
+        padding: 12px;
+      }
+
+      nav {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      main { padding: 16px; }
+
+      .feedback-container { width: 90%; padding: 18px; }
+
+      .segment img { max-height: 200px; }
+    }
+
+    @media (max-width: 480px) {
+      header h1 { font-size: 1.1em; }
+      nav a { font-size: 0.95em; }
+      .transcript-btn { width: 100%; text-align: center; }
+      input, textarea, button { font-size: 0.9em; }
+    }
   </style>
 </head>
 <body>
@@ -319,3 +472,4 @@
   </script>
 </body>
 </html>
+
