@@ -1,40 +1,95 @@
+<!DOCTYPE html>
+<html lang="ms">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UUM Management Museum Audio Guide Website</title>
   <style>
-    :root {
-      --uum-blue: #003366;
-      --uum-yellow: #ffcc00;
-      --white: #ffffff;
-      --light-bg: #f4f6fb;
-      --card-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
+:root {
+  --uum-blue: #003366;
+  --uum-yellow: #ffcc00;
+  --white: #ffffff;
+  --light-bg: #2d3957;
+}
 
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      background: var(--light-bg);
-      color: #222;
-      line-height: 1.6;
-    }
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  background: var(--light-bg);
+  color: #222;
+  line-height: 1.6;
+}
 
-    header {
-      background: var(--uum-blue);
-      color: var(--white);
-      padding: 16px 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-    }
+/* ===== Header layout ===== */
+.uum-header {
+  background: var(--white);
+  color: var(--uum-blue);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  padding: 14px 24px;
+  gap: 20px;
 
-    header h1 {
-      margin: 0;
-      font-size: 1.4em;
-      flex: 1 1 100%;
-      text-align: center;
-    }
+  border-bottom: 4px solid var(--uum-blue);
+}
+
+/* Left section */
+.header-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.uum-logo {
+  height: 70px;
+  margin-bottom: 4px;
+}
+
+.header-subtitle {
+  font-size: 0.85em;
+  color: var(--uum-blue);
+  opacity: 0.9;
+}
+
+/* Center title */
+.header-center {
+  text-align: center;
+}
+
+.header-center h1 {
+  margin: 0;
+  font-size: 1.4em;
+  font-weight: 700;
+  color: var(--uum-blue);
+}
+
+/* Right navigation */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.header-right a {
+  color: var(--uum-blue);
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.header-right a:hover {
+  color: var(--uum-yellow);
+}
+
+.header-right select {
+  background: var(--white);
+  color: var(--uum-blue);
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--uum-blue);
+  cursor: pointer;
+}
+
 
     nav {
       display: flex;
@@ -182,8 +237,8 @@
     }
 
     footer {
-      background: var(--uum-blue);
-      color: var(--white);
+      background: var(--white);
+      color: var(--uum-blue);
       padding: 20px 24px;
       text-align: center;
       margin-top: 40px;
@@ -194,44 +249,50 @@
     footer a:hover { text-decoration: underline; }
 
     /* ===== Responsive adjustments ===== */
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        text-align: center;
-        padding: 12px;
-      }
+   @media (max-width: 768px) {
+   .uum-header {
+    grid-template-columns: 1fr;
+    text-align: center;
+   }
 
-      nav {
-        flex-direction: column;
-        gap: 10px;
-      }
+   .header-left {
+    align-items: center;
+   }
 
-      main { padding: 16px; }
-
-      .feedback-container { width: 90%; padding: 18px; }
-
-      .segment img { max-height: 200px; }
-    }
-
-    @media (max-width: 480px) {
-      header h1 { font-size: 1.1em; }
-      nav a { font-size: 0.95em; }
-      .transcript-btn { width: 100%; text-align: center; }
-      input, textarea, button { font-size: 0.9em; }
-    }
+   .header-right {
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 10px;
+   }
+}
   </style>
+
+
+
 </head>
 <body>
-  <header>
+  <header class="uum-header">
+  <!-- LEFT: Logo + Subtitle -->
+  <div class="header-left">
+    <img src="uumlogo.png" alt="UUM Logo" class="uum-logo">
+    <span class="header-subtitle" id="header-subtitle">
+    </span>
+  </div>
+
+  <!-- CENTER: Main title -->
+  <div class="header-center">
     <h1 id="title"></h1>
-    <nav>
-      <a id="nav-audio"></a>
-      <a id="nav-feedback"></a>
-      <select id="lang-select">
-        <option value="ms">BM</option>
-        <option value="en">EN</option>
-      </select>
-    </nav>
+  </div>
+
+  <!-- RIGHT: Navigation -->
+  <nav class="header-right">
+    <a id="nav-audio"></a>
+    <a id="nav-feedback"></a>
+    <select id="lang-select">
+      <option value="ms">BM</option>
+      <option value="en">EN</option>
+    </select>
+  </nav>
   </header>
 
   <main>
@@ -283,6 +344,16 @@
         <button class="transcript-btn" data-target="seg5-trans"></button>
         <div class="transcript" id="seg5-trans"></div>
       </div>
+
+      <div class="segment">
+        <img src="imagessegment6.jpg" alt="Segment 6">
+        <h3 id="seg6-title"></h3>
+        <audio class="audio-bm" controls src="audiosegmen6-bm.mp3"></audio>
+        <audio class="audio-en" controls src="audiosegmen6-en.mp3" style="display:none;"></audio>
+        <button class="transcript-btn" data-target="seg6-trans"></button>
+        <div class="transcript" id="seg6-trans"></div>
+      </div>
+
     </section>
 
     <!-- FEEDBACK PAGE -->
@@ -299,6 +370,7 @@
         <div class="feedback-display" id="feedbackDisplay">
           <h3 id="submitted-title"></h3>
         </div>
+        
         <a class="back-btn" id="backAudio"></a>
       </div>
     </section>
@@ -356,20 +428,22 @@
         title: "Panduan Audio Muzium Pengurusan UUM",
         navAudio: "Panduan Audio",
         navFeedback: "Borang Maklum Balas",
-        audioHeading: "Segmen Audio Panduan Muzium",
+        audioHeading: " ",
         segTitles: [
-          "Segmen 1: Sejarah Penubuhan UUM",
-          "Segmen 2: Visi dan Misi Universiti",
-          "Segmen 3: Fakulti dan Pusat Pengajian",
-          "Segmen 4: Koleksi Muzium",
-          "Segmen 5: Tokoh dan Sumbangan"
+          "Zon A: Sejarah Penubuhan UUM",
+          "Zon B: Visi dan Misi Universiti",
+          "Zon C: Fakulti dan Pusat Pengajian",
+          "Zon D: Koleksi Muzium",
+          "Zon E: Tokoh dan Sumbangan",
+          "Zon F: Nurin"
         ],
         transcripts: [
           "Universiti Utara Malaysia ditubuhkan pada tahun 1984 di Sintok...",
           "Visi UUM adalah untuk menjadi universiti pengurusan terkemuka...",
           "UUM mempunyai pelbagai fakulti dan pusat pengajian yang fokus kepada bidang pengurusan...",
           "Muzium ini mempamerkan pelbagai artifak dan sejarah penubuhan universiti...",
-          "Bahagian ini memperkenalkan tokoh dan sumbangan penting kepada pembangunan UUM..."
+          "Bahagian ini memperkenalkan tokoh dan sumbangan penting kepada pembangunan UUM...",
+          "Nurin Nabilah"
         ],
         feedbackTitle: "Borang Maklum Balas",
         labelName: "Nama:",
@@ -380,29 +454,29 @@
         submittedTitle: "Maklum Balas Dihantar:",
         backBtn: "← Kembali ke Panduan Audio",
         transcriptBtn: "Transkrip",
-        footer1: "UUM Management Museum | Universiti Utara Malaysia",
-        footer2: "Email: museum@uum.edu.my | Tel: +604-928 4000",
-        footer3: "www.uum.edu.my",
-        footer4: "© 2025 Panduan Audio Muzium UUM. Semua Hak Terpelihara."
-      },
+        footer1: `UUM Management Museum | <a href="https://library.uum.edu.my/uum-management-museum/" target="_blank">Universiti Utara Malaysia</a>`,
+        footer2: `Email: museum@uum.edu.my | Tel: +604 928 2614`,
+        footer3: `© 2025 Panduan Audio Muzium UUM. Semua Hak Terpelihara.`      },
       en: {
         title: "UUM Management Museum Audio Guide",
         navAudio: "Audio Guide",
         navFeedback: "Feedback Form",
-        audioHeading: "Museum Audio Guide Segments",
+        audioHeading: " ",
         segTitles: [
-          "Segment 1: History of UUM",
-          "Segment 2: Vision and Mission",
-          "Segment 3: Faculties and Academic Centers",
-          "Segment 4: Museum Collections",
-          "Segment 5: Key Figures and Contributions"
+          "Zone A: History of UUM",
+          "Zone B: Vision and Mission",
+          "Zone C: Faculties and Academic Centers",
+          "Zone D: Museum Collections",
+          "Zone E: Key Figures and Contributions",
+          "Zone F : Nurin"
         ],
         transcripts: [
           "Universiti Utara Malaysia was established in 1984 in Sintok...",
           "UUM’s vision is to be a leading management university...",
           "UUM has multiple faculties and academic centers focused on management...",
           "The museum showcases various artifacts and historical documents...",
-          "This section introduces key figures and their contributions to UUM..."
+          "This section introduces key figures and their contributions to UUM...",
+          "Nurin nabilah binti nik shahrul nizam"
         ],
         feedbackTitle: "Feedback Form",
         labelName: "Name:",
@@ -413,10 +487,9 @@
         submittedTitle: "Feedback Submitted:",
         backBtn: "← Back to Audio Guide",
         transcriptBtn: "Transcript",
-        footer1: "UUM Management Museum | Universiti Utara Malaysia",
-        footer2: "Email: museum@uum.edu.my | Tel: +604-928 4000",
-        footer3: "www.uum.edu.my",
-        footer4: "© 2025 UUM Museum Audio Guide. All Rights Reserved."
+        footer1: `UUM Management Museum | <a href="https://library.uum.edu.my/uum-management-museum/" target="_blank">Universiti Utara Malaysia</a>`,
+        footer2: `Email: museum@uum.edu.my | Tel: +604 928 2614`,
+        footer3: `© 2025 UUM Museum Audio Guide. All Rights Reserved.`,
       }
     };
 
@@ -427,7 +500,7 @@
       document.getElementById('nav-feedback').innerText = t.navFeedback;
       document.getElementById('audio-heading').innerText = t.audioHeading;
 
-      for (let i = 1; i <= 5; i++) {
+      for (let i = 1; i <= 6; i++) {
         document.getElementById(`seg${i}-title`).innerText = t.segTitles[i-1];
         document.getElementById(`seg${i}-trans`).innerText = t.transcripts[i-1];
       }
@@ -446,10 +519,9 @@
       document.querySelectorAll('.audio-bm').forEach(a => a.style.display = lang==='ms' ? 'block':'none');
       document.querySelectorAll('.audio-en').forEach(a => a.style.display = lang==='en' ? 'block':'none');
 
-      document.getElementById('footer1').innerText = t.footer1;
-      document.getElementById('footer2').innerText = t.footer2;
-      document.getElementById('footer3').innerText = t.footer3;
-      document.getElementById('footer4').innerText = t.footer4;
+      document.getElementById('footer1').innerHTML = t.footer1;
+      document.getElementById('footer2').innerHTML = t.footer2;
+      document.getElementById('footer3').innerHTML = t.footer3;
     }
 
     langSelect.addEventListener('change', () => {
@@ -457,6 +529,7 @@
       localStorage.setItem('lang', lang);
       applyLanguage(lang);
     });
+
 
     applyLanguage(localStorage.getItem('lang') || 'ms');
 
@@ -470,4 +543,3 @@
   </script>
 </body>
 </html>
-
